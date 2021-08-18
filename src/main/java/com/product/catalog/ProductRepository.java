@@ -1,6 +1,7 @@
 package com.product.catalog;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -29,6 +30,8 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 
     @Override
     List<Product> findAll();
+
+    Iterable<Product> findAll(Sort sort);
 
     @Override
     Optional<Product> findById(Long aLong);

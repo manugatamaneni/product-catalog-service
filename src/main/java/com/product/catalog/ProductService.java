@@ -1,6 +1,8 @@
 package com.product.catalog;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +13,21 @@ import java.util.Optional;
 @Transactional
 public class ProductService {
 
+
     @Autowired
     private ProductRepository productRepository;
+
+
+
+
 
     public List<Product> listAllProducts(){
 
         return productRepository.findAll();
+    }
+
+    public Iterable<Product> getProductListSorted(String colName){
+        return productRepository.findAll(Sort.by(colName).ascending());
     }
 
     public String saveProduct(Product product){

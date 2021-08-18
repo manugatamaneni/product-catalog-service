@@ -2,6 +2,7 @@ package com.product.catalog;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ import java.util.Optional;
 
 @RestController
 public class ProductController {
+
+    @Value("${product.list.sort.column.default}")
+    private String defaultSortCol;
 
     @Autowired
     public ProductService productService;
@@ -29,6 +33,12 @@ public class ProductController {
     public List < Product > getProductList() {
 
         return productService.listAllProducts();
+    }
+
+    @GetMapping("/productsSorted")
+    public Iterable < Product > getProductListSorted() {
+
+        return productService.getProductListSorted(defaultSortCol);
     }
 
     @PutMapping("/product")
